@@ -107,14 +107,17 @@ exports.postLogin = (req, res, next) => {
         }
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const errors = validationResult(req);
-  console.log(errors.array());
   if (!errors.isEmpty()) {
     return res.status(422).render("auth/signup", {
       path: "/signup",
@@ -150,7 +153,9 @@ exports.postSignup = (req, res, next) => {
       res.redirect("/login");
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
     });
 };
 
@@ -229,7 +234,11 @@ exports.getNewPassword = (req, res, next) => {
         passwordToken: token,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
 
   let message = req.flash("error");
   if (message.length > 0) {
@@ -266,5 +275,9 @@ exports.postNewPassword = (req, res, next) => {
           res.redirect("/login");
         });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
 };
