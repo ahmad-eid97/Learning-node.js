@@ -11,11 +11,11 @@
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
         <form class="login-form" action="/reset" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="form-control">
                 <label for="email">E-Mail</label>
                 <input type="email" name="email" id="email">
             </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit">Reset Password</button>
         </form>
     </main>

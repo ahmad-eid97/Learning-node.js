@@ -24,6 +24,5 @@
 
 .form-control input.invalid,
 .form-control textarea.invalid {
-  border-color: #ff8a80;
-  background-color: #fad9d6;
+  border-color: red;
 }
